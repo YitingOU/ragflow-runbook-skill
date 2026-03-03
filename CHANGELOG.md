@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Metadata: switch SKILL front matter metadata to pure YAML so registry can parse required env vars and optional bins.
+- Alerting: declare `openclaw` as an optional required binary (only needed for sending alerts).
+
 ## 0.1.1
 
 - Security: `ragflow_alert.py` no longer defaults to a hardcoded Telegram target and no longer includes base_url in the alert message.

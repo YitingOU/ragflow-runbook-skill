@@ -20,6 +20,7 @@ Exit codes:
 import argparse
 import datetime as dt
 import os
+import shutil
 import subprocess
 import sys
 
@@ -32,6 +33,10 @@ def now_iso() -> str:
 
 
 def send_telegram(account: str, target: str, message: str) -> int:
+    if not shutil.which("openclaw"):
+        print("ERROR: 'openclaw' CLI not found. Install/configure OpenClaw or disable alerting.")
+        return 3
+
     cmd = [
         "openclaw",
         "message",

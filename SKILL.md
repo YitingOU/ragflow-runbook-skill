@@ -1,20 +1,15 @@
 ---
 name: ragflow-runbook
-version: 0.1.1
+version: 0.1.2
 description: End-to-end runbook for deploying, operating, troubleshooting, and monitoring RAGFlow (runtime ops only).
 metadata:
-  {
-    "openclaw": {
-      "requires": {
-        "bins": ["python3", "docker", "curl"],
-        "optional_bins": ["git"]
-      },
-      "env": {
-        "required": ["RAGFLOW_BASE_URL"],
-        "optional": ["RAGFLOW_API_KEY", "OPENCLAW_PRIMARY_CHAT_ID"]
-      }
-    }
-  }
+  openclaw:
+    requires:
+      bins: [python3, docker, curl]
+      optional_bins: [git, openclaw]
+    env:
+      required: [RAGFLOW_BASE_URL]
+      optional: [RAGFLOW_API_KEY, OPENCLAW_PRIMARY_CHAT_ID]
 ---
 
 # ragflow-runbook Skill
