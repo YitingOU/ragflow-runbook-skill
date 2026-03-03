@@ -1,6 +1,6 @@
 ---
 name: ragflow-runbook
-version: 0.1.0
+version: 0.1.1
 description: End-to-end runbook for deploying, operating, troubleshooting, and monitoring RAGFlow (runtime ops only).
 metadata:
   {
@@ -8,6 +8,10 @@ metadata:
       "requires": {
         "bins": ["python3", "docker", "curl"],
         "optional_bins": ["git"]
+      },
+      "env": {
+        "required": ["RAGFLOW_BASE_URL"],
+        "optional": ["RAGFLOW_API_KEY", "OPENCLAW_PRIMARY_CHAT_ID"]
       }
     }
   }

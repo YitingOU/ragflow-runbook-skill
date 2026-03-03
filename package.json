@@ -1,6 +1,6 @@
 {
   "name": "ragflow-runbook-skill",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenClaw skill: end-to-end runbook for RAGFlow runtime operations",
   "private": true,
   "keywords": [

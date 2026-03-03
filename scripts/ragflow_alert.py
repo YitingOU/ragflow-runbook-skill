@@ -8,7 +8,7 @@ Inputs:
 - --title (required)
 - --details (optional; do NOT include secrets)
 - --account (optional; default: notification)
-- --target (optional; default: $OPENCLAW_PRIMARY_CHAT_ID or telegram:8598320098)
+- --target (required unless OPENCLAW_PRIMARY_CHAT_ID is set)
 
 Behavior:
 - Calls: openclaw message send --channel telegram ...
@@ -57,15 +57,15 @@ def main() -> int:
     ap.add_argument("--title", required=True)
     ap.add_argument("--details", default="")
     ap.add_argument("--account", default="notification")
-    ap.add_argument("--target", default=os.environ.get("OPENCLAW_PRIMARY_CHAT_ID", "telegram:8598320098"))
+    ap.add_argument("--target", default=os.environ.get("OPENCLAW_PRIMARY_CHAT_ID", "").strip())
     args = ap.parse_args()
 
-    base_url = os.environ.get("RAGFLOW_BASE_URL", "").strip()
+    if not args.target:
+        print("ERROR: missing alert target. Set OPENCLAW_PRIMARY_CHAT_ID or pass --target.")
+        return 2
 
     ts = now_iso()
     msg = f"[{ts}] RAGFlow ALERT: {args.title}"
-    if base_url:
-        msg += f"\nbase_url: {base_url}"
     if args.details:
         msg += f"\n{args.details}"
 

@@ -2,7 +2,7 @@
 
 Runtime operations runbook for RAGFlow: deploy, operate, troubleshoot, monitor.
 
-Version: 0.1.0
+Version: 0.1.1
 
 ---
 

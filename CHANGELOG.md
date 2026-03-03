@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Security: `ragflow_alert.py` no longer defaults to a hardcoded Telegram target and no longer includes base_url in the alert message.
+- Metadata: declare required environment variables in skill front matter.
+
 ## 0.1.0
 
 - Initial release.
