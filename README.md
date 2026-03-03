@@ -1,35 +1,55 @@
-# ragflow-runbook Skill
+# ragflow-runbook
 
-End-to-end runbook for RAGFlow runtime operations (deploy, operate, troubleshoot, monitor).
+Runtime operations runbook for RAGFlow: deploy, operate, troubleshoot, monitor.
 
 Version: 0.1.0
 
 ---
 
-## What You Get
+## Scope
 
-- Deployment guidance (Windows/WSL2 + Linux)
-- Service management commands
-- Logs + troubleshooting workflow
-- Backup/restore basics
-- Ops API checks + examples (system endpoints only)
-- Health check helpers
+This skill is **ops-only**. It focuses on keeping RAGFlow running and observable.
+
+Included:
+- Deployment (git-clone first, download fallback)
+- Health checks (liveness/readiness)
+- Smoke checks (system endpoints only)
+- Alerting helper (via OpenClaw messaging)
+- Copy/paste scheduling templates (cron + launchd)
+
+Not included:
+- Any application-layer design or content workflows
 
 ---
 
-## How To Use
+## Requirements
 
-This is a documentation-style skill. No installation needed.
+- Required: `python3`, `docker`, `curl`
+- Optional: `git` (recommended for deploy)
+
+---
+
+## Quick Start
+
+Deploy (preferred path: git clone):
 
 ```bash
-# Reference the skill in OpenClaw
-openclaw skills ragflow-runbook
+bash skills/ragflow-runbook/scripts/deploy.sh /opt/ragflow
 ```
 
-Or just read the doc:
+Set env vars (adjust host/port):
 
 ```bash
-cat skills/ragflow-runbook/SKILL.md
+export RAGFLOW_BASE_URL="http://127.0.0.1:9380"
+export RAGFLOW_API_KEY="ragflow-..."  # do not paste into chat / do not commit
+```
+
+Run checks:
+
+```bash
+python3 skills/ragflow-runbook/scripts/ragflow_ping.py
+python3 skills/ragflow-runbook/scripts/ragflow_smoke.py
+bash skills/ragflow-runbook/scripts/healthcheck.sh
 ```
 
 ---
@@ -38,24 +58,25 @@ cat skills/ragflow-runbook/SKILL.md
 
 ```
 ragflow-runbook/
-├── SKILL.md
-├── README.md
+├── SKILL.md              # Full runbook (ops playbook)
+├── README.md             # This file
 ├── CHANGELOG.md
+├── package.json
 ├── scripts/
-│   ├── deploy.sh
-│   ├── healthcheck.sh
-│   ├── ragflow_ping.py
-│   ├── ragflow_smoke.py
-│   ├── ragflow_status.py
-│   └── ragflow_alert.py
+│   ├── deploy.sh         # Deploy helper (git clone preferred)
+│   ├── healthcheck.sh    # Healthcheck wrapper (calls skill-local scripts)
+│   ├── ragflow_ping.py   # Liveness + readiness
+│   ├── ragflow_smoke.py  # Ops smoke (system endpoints only)
+│   ├── ragflow_status.py # Compact status summary
+│   └── ragflow_alert.py  # Alert via OpenClaw messaging
 └── examples/
-    ├── api-examples.sh
+    ├── api-examples.sh   # Ops API examples (system endpoints only)
     └── troubleshooting.md
 ```
 
 ---
 
-## Quick Commands
+## Common Docker Commands
 
 | Action | Command |
 |---|---|
@@ -67,8 +88,7 @@ ragflow-runbook/
 
 ---
 
-## Help
+## References
 
-- Primary doc: `SKILL.md`
-- Upstream docs: https://ragflow.io/docs/
-- GitHub: https://github.com/infiniflow/ragflow
+- RAGFlow docs: https://ragflow.io/docs/
+- Upstream repo: https://github.com/infiniflow/ragflow
