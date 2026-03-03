@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Metadata compatibility: duplicate required/optional env var declarations at top-level (`env`) and `metadata.env` to ensure registry/security scanners display them.
+
 ## 0.1.2
 
 - Metadata: switch SKILL front matter metadata to pure YAML so registry can parse required env vars and optional bins.

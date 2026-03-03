@@ -1,8 +1,18 @@
 ---
 name: ragflow-runbook
-version: 0.1.2
+version: 0.1.3
 description: End-to-end runbook for deploying, operating, troubleshooting, and monitoring RAGFlow (runtime ops only).
+
+# Compatibility: some registries/security scanners only detect env vars if they are declared
+# at the document top-level or under `metadata.env`. We keep the OpenClaw namespace too.
+env:
+  required: [RAGFLOW_BASE_URL]
+  optional: [RAGFLOW_API_KEY, OPENCLAW_PRIMARY_CHAT_ID]
+
 metadata:
+  env:
+    required: [RAGFLOW_BASE_URL]
+    optional: [RAGFLOW_API_KEY, OPENCLAW_PRIMARY_CHAT_ID]
   openclaw:
     requires:
       bins: [python3, docker, curl]
